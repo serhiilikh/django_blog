@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if post %}
+    <p>
+    {{ post.title }}
+    </p>
+    {{ post.content|safe }}
+    {% load static %}
+{#        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
+{% else %}
+    <p>No post info</p>
+{% endif %}
+
+{% if form %}
+    <h1>New comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Submit</button>
+    </form>
+{% else %}
+    Authorize to comment
+{% endif %}
+    <p> </p>
+    <hr class="mt-0 mb-4">
+
+<h2>Comments</h2>
+ {% if comments %}
+     {% for comment in comments %}
+          <p>
+          {% if comment.user.get_full_name %}
+              {{ comment.user.get_full_name }}<br>
+          {% else %}
+              User did not provided credentials<br>
+          {% endif %}
+          {{ comment.text }}
+          </p>
+     {% endfor %}
+
+    {% else %}
+        <p>No comments yet</p>
+    {% endif %}
+
+{% endblock %}

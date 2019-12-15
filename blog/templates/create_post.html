@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <p>
+            {{ form.media }}
+            Title
+            {{ form.title }}
+        </p>
+        {{ form.content|safe }}
+        <button type="submit" class="save btn btn-default">Submit</button>
+    </form>
+{% endblock %}
+
+
+
+
