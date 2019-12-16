@@ -10,3 +10,4 @@
 ```bash
 python fire.py
 ```
+test db superuser login/pass: serg/1
